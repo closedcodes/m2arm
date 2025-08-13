@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  m2arm-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - .:/workspace
+      - go-cache:/go/pkg/mod
+      - pip-cache:/root/.cache/pip
+    environment:
+      - GO111MODULE=on
+      - CGO_ENABLED=1
+    working_dir: /workspace
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+    
+  m2arm-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    volumes:
+      - ./examples:/workspace/examples:ro
+      - ./output:/workspace/output
+    environment:
+      - M2ARM_OUTPUT_DIR=/workspace/output
+    command: ["m2arm", "--help"]
+
+  # ARM testing environment with QEMU
+  m2arm-arm64:
+    platform: linux/arm64
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    volumes:
+      - ./examples:/workspace/examples:ro
+      - ./output:/workspace/output
+    environment:
+      - M2ARM_OUTPUT_DIR=/workspace/output
+      - M2ARM_NATIVE_ARM=true
+
+volumes:
+  go-cache:
+  pip-cache:
