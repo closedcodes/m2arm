@@ -1,0 +1,116 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "m2arm"
+version = "0.1.0"
+description = "Migration and modernization toolkit for moving applications from x86 to ARM architecture"
+readme = "README.md"
+authors = [
+    {name = "M2ARM Contributors", email = "opensource@closedcodes.dev"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Compilers",
+]
+keywords = ["arm", "x86", "migration", "cross-compilation", "architecture", "neon", "simd"]
+requires-python = ">=3.8"
+dependencies = [
+    "click>=8.0.0",
+    "pydantic>=2.0.0",
+    "rich>=13.0.0",
+    "python-magic>=0.4.27",
+    "packaging>=21.0",
+    "astunparse>=1.6.3",
+    "libclang>=16.0.0",
+    "tree-sitter>=0.20.0",
+    "psutil>=5.9.0",
+    "pympler>=0.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+    "isort>=5.12.0",
+]
+docs = [
+    "sphinx>=6.0.0",
+    "sphinx-rtd-theme>=1.2.0",
+]
+build = [
+    "cmake>=3.25.0",
+    "crossenv>=1.4.0",
+]
+testing = [
+    "docker>=6.0.0",
+    "paramiko>=3.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/closedcodes/m2arm"
+Documentation = "https://github.com/closedcodes/m2arm/docs"
+Repository = "https://github.com/closedcodes/m2arm.git"
+"Bug Tracker" = "https://github.com/closedcodes/m2arm/issues"
+
+[project.scripts]
+m2arm-py = "m2arm:main"
+
+[tool.setuptools]
+packages = ["m2arm"]
+
+[tool.setuptools.package-dir]
+m2arm = "."
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | examples
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "--cov=. --cov-report=term-missing --cov-report=xml"

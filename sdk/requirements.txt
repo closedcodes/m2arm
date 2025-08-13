@@ -1,0 +1,39 @@
+# M2ARM Python SDK Dependencies
+
+# Core dependencies
+click>=8.0.0
+pydantic>=2.0.0
+rich>=13.0.0
+python-magic>=0.4.27
+packaging>=21.0
+
+# Code analysis and parsing
+astunparse>=1.6.3
+libclang>=16.0.0
+tree-sitter>=0.20.0
+
+# Build system integration
+cmake>=3.25.0
+
+# Cross-compilation and toolchain support
+crossenv>=1.4.0
+
+# Testing and emulation
+docker>=6.0.0
+paramiko>=3.0.0
+
+# Performance monitoring
+psutil>=5.9.0
+pympler>=0.9
+
+# Development dependencies (optional)
+pytest>=7.0.0
+pytest-cov>=4.0.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0
+isort>=5.12.0
+
+# Documentation
+sphinx>=6.0.0
+sphinx-rtd-theme>=1.2.0
