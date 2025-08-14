@@ -138,9 +138,33 @@ cd sdk && pip install -e . && cd ..
 # Build Go CLI
 cd cli && go build -o m2arm main.go && cd ..
 
+# Install development tools
+pip install pre-commit black isort flake8 mypy
+pre-commit install
+
 # Run tests
 cd sdk && pytest tests/
 cd cli && go test ./...
+```
+
+### Code Quality
+The project uses automated code formatting and quality checks:
+
+```bash
+# Format Python code
+cd sdk && black . --line-length 88
+
+# Sort imports
+cd sdk && isort . --profile black
+
+# Run linting
+cd sdk && flake8 . --max-line-length=88
+
+# Type checking
+cd sdk && mypy . --ignore-missing-imports
+
+# Run all pre-commit hooks
+pre-commit run --all-files
 ```
 
 ### CI/CD Status
