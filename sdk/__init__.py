@@ -18,9 +18,9 @@ from .optimizer import PerformanceOptimizer
 
 __all__ = [
     "M2ARMCore",
-    "CodeScanner", 
+    "CodeScanner",
     "Migrator",
     "CrossCompiler",
     "ARMTester",
-    "PerformanceOptimizer"
+    "PerformanceOptimizer",
 ]
